@@ -4,6 +4,7 @@ export const collections = {
   topics: "topics",
   sources: "sources",
   notificationCampaigns: "notification_campaigns",
+  staticPages: "static_pages",
   homeBanners: "home_banners",
   fundingOpportunities: "funding_opportunities",
   events: "events",

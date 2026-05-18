@@ -16,6 +16,7 @@ const Notifications = lazy(() => import("@/pages/Notifications").then((m) => ({ 
 const Moderation = lazy(() => import("@/pages/Moderation").then((m) => ({ default: m.Moderation })));
 const HomeModules = lazy(() => import("@/pages/HomeModules").then((m) => ({ default: m.HomeModules })));
 const Settings = lazy(() => import("@/pages/Settings").then((m) => ({ default: m.Settings })));
+const StaticPages = lazy(() => import("@/pages/StaticPages").then((m) => ({ default: m.StaticPages })));
 const Login = lazy(() => import("@/pages/Login").then((m) => ({ default: m.Login })));
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })));
 
@@ -46,6 +47,7 @@ export function RouteRenderer() {
           <Route path="/moderation" element={<Moderation />} />
           <Route path="/home" element={<HomeModules />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/settings/static-pages" element={<StaticPages />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
