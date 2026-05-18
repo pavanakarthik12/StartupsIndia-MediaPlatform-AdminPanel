@@ -1,0 +1,24 @@
+export type UserProfile = {
+  uid: string;
+  username: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  displayName: string;
+  bio: string;
+  avatarUrl: string;
+  websiteUrl: string;
+  followersCount: number;
+  followingCount: number;
+  newsCount: number;
+  role: string;
+  interests: string[];
+  onboardingCompleted: boolean;
+  fcmTokens: string[];
+  updatedAt: unknown;
+  accountStatus?: "active" | "suspended" | "deleted";
+  adminRole?: "user" | "author" | "moderator" | "admin";
+  isVerified?: boolean;
+  createdAt?: unknown;
+  lastLoginAt?: unknown;
+};
