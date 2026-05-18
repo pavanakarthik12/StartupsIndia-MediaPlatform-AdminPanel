@@ -13,7 +13,7 @@ import { db } from "@/firebase/client";
 
 export async function listHomeModule<T>(collectionName: string) {
   const snapshot = await getDocs(query(collection(db, collectionName), orderBy("updatedAt", "desc")));
-  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as T) }));
+  return snapshot.docs.map((item) => ({ ...(item.data() as T) , id: item.id }));
 }
 
 export async function createHomeModule<T>(collectionName: string, payload: Partial<T>) {

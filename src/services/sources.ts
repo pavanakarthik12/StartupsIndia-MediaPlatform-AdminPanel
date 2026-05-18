@@ -16,13 +16,13 @@ import { collections } from "@/constants/collections";
 
 export async function listSources() {
   const snapshot = await getDocs(query(collection(db, collections.sources), orderBy("updatedAt", "desc")));
-  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as SourceProfile) }));
+  return snapshot.docs.map((item) => ({ ...(item.data() as SourceProfile) , id: item.id }));
 }
 
 export async function getSourceById(id: string) {
   const snapshot = await getDoc(doc(db, collections.sources, id));
   if (!snapshot.exists()) return null;
-  return { id: snapshot.id, ...(snapshot.data() as SourceProfile) };
+  return { ...(snapshot.data() as SourceProfile) , id: snapshot.id };
 }
 
 export async function createSource(payload: Partial<SourceProfile>) {

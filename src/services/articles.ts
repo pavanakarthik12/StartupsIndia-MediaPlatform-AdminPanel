@@ -17,13 +17,13 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export async function listArticles() {
   const snapshot = await getDocs(query(collection(db, collections.articles), orderBy("updatedAt", "desc")));
-  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Article) }));
+  return snapshot.docs.map((item) => ({ ...(item.data() as Article) , id: item.id }));
 }
 
 export async function getArticleById(id: string) {
   const snapshot = await getDoc(doc(db, collections.articles, id));
   if (!snapshot.exists()) return null;
-  return { id: snapshot.id, ...(snapshot.data() as Article) };
+  return { ...(snapshot.data() as Article) , id: snapshot.id };
 }
 
 export async function upsertArticle(id: string, payload: Partial<Article>) {

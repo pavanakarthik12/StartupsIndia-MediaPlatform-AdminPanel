@@ -215,7 +215,7 @@ export function HomeModules() {
   const [editingItem, setEditingItem] = useState<Record<string, unknown> | null>(null);
   const [formState, setFormState] = useState<Record<string, string | number | boolean>>({});
 
-  const config = moduleConfigs.find((item) => item.key === activeModule) ?? moduleConfigs[0];
+  const config = moduleConfigs.find((item) => item.key === activeModule) ?? moduleConfigs[0]!;
   const moduleData = dataMap[activeModule].query.data ?? [];
   const moduleActions = dataMap[activeModule];
 
@@ -308,16 +308,16 @@ export function HomeModules() {
       <div className="grid gap-4 lg:grid-cols-3">
         {moduleData.map((item) => (
           <Card key={String(item.id)} className="flex flex-col gap-3">
-            {config.mediaField && (item as Record<string, string>)[config.mediaField] && (
+            {config.mediaField && (item as any)[config.mediaField] && (
               <img
-                src={(item as Record<string, string>)[config.mediaField]}
-                alt={previewTitle(item as Record<string, unknown>)}
+                src={(item as any)[config.mediaField]}
+                alt={previewTitle(item as any)}
                 className="h-32 w-full rounded-xl object-cover"
               />
             )}
             <div>
-              <p className="text-sm font-semibold">{previewTitle(item as Record<string, unknown>)}</p>
-              <p className="text-xs text-muted-foreground">{previewSubtitle(item as Record<string, unknown>)}</p>
+              <p className="text-sm font-semibold">{previewTitle(item as any)}</p>
+              <p className="text-xs text-muted-foreground">{previewSubtitle(item as any)}</p>
             </div>
             <div className="flex flex-wrap gap-2 text-xs">
               <span className="rounded-full border border-border px-2 py-1">Sort: {String(item.sortOrder ?? 0)}</span>

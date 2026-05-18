@@ -10,7 +10,8 @@ const firebaseApp = initializeApp({
   projectId: env.firebaseProjectId,
   storageBucket: env.firebaseStorageBucket,
   messagingSenderId: env.firebaseMessagingSenderId,
-  appId: env.firebaseAppId
+  appId: env.firebaseAppId,
+  measurementId: env.firebaseMeasurementId
 });
 
 export const auth = getAuth(firebaseApp);

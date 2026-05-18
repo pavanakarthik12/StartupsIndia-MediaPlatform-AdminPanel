@@ -31,7 +31,7 @@ export async function paginateCollection<T>(
     : query(baseQuery, limit(options.limitSize));
 
   const snapshot = await getDocs(cursorQuery);
-  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as T) }));
+  return snapshot.docs.map((item) => ({ ...(item.data() as T) , id: item.id }));
 }
 
 export async function batchUpdate(updates: Array<{ path: string; payload: Record<string, unknown> }>) {

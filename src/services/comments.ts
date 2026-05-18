@@ -7,10 +7,10 @@ export async function listComments() {
   return snapshot.docs.map((item) => {
     const articleId = item.ref.parent.parent?.id ?? "";
     return {
+      ...(item.data() as Comment),
       id: item.id,
       articleId,
-      path: item.ref.path,
-      ...(item.data() as Comment)
+      path: item.ref.path
     } as Comment & { articleId: string; path: string };
   });
 }

@@ -5,7 +5,7 @@ import { collections } from "@/constants/collections";
 
 export async function listNotificationCampaigns() {
   const snapshot = await getDocs(query(collection(db, collections.notificationCampaigns), orderBy("createdAt", "desc")));
-  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as NotificationCampaign) }));
+  return snapshot.docs.map((item) => ({ ...(item.data() as NotificationCampaign) , id: item.id }));
 }
 
 export async function createCampaign(payload: Partial<NotificationCampaign>) {

@@ -5,7 +5,7 @@ import { collections } from "@/constants/collections";
 
 export async function listTopics() {
   const snapshot = await getDocs(query(collection(db, collections.topics), orderBy("sortOrder", "asc")));
-  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Topic) }));
+  return snapshot.docs.map((item) => ({ ...(item.data() as Topic) , id: item.id }));
 }
 
 export async function upsertTopic(id: string, payload: Partial<Topic>) {
