@@ -5,6 +5,7 @@ import { AdminLayout } from "@/layouts/AdminLayout";
 
 const Dashboard = lazy(() => import("@/pages/Dashboard").then((m) => ({ default: m.Dashboard })));
 const Articles = lazy(() => import("@/pages/Articles").then((m) => ({ default: m.Articles })));
+const ArticleEditor = lazy(() => import("@/pages/ArticleEditor").then((m) => ({ default: m.ArticleEditor })));
 const Users = lazy(() => import("@/pages/Users").then((m) => ({ default: m.Users })));
 const Topics = lazy(() => import("@/pages/Topics").then((m) => ({ default: m.Topics })));
 const Sources = lazy(() => import("@/pages/Sources").then((m) => ({ default: m.Sources })));
@@ -29,6 +30,8 @@ export function RouteRenderer() {
         >
           <Route path="/" element={<Dashboard />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/new" element={<ArticleEditor />} />
+          <Route path="/articles/:id" element={<ArticleEditor />} />
           <Route path="/users" element={<Users />} />
           <Route path="/topics" element={<Topics />} />
           <Route path="/sources" element={<Sources />} />
