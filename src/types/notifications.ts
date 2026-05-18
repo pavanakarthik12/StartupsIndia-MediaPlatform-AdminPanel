@@ -1,10 +1,10 @@
-export type CampaignStatus = "draft" | "sent" | "failed";
+export type CampaignStatus = "draft" | "scheduled" | "sent" | "failed";
 
 export type NotificationCampaign = {
   id: string;
   title: string;
   body: string;
-  targetType: "all" | "role" | "interest" | "user";
+  targetType: "all" | "role" | "interest" | "topic" | "user";
   targetValue: string | string[];
   payload?: {
     page?: string;
@@ -14,4 +14,9 @@ export type NotificationCampaign = {
   sentCount: number;
   createdAt?: unknown;
   sentAt?: unknown;
+  scheduledAt?: unknown;
+  deliveryRate?: number;
+  opens?: number;
+  clicks?: number;
+  errorMessage?: string;
 };

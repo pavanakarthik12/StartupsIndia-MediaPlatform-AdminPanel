@@ -2,6 +2,8 @@ export type CommentStatus = "visible" | "hidden" | "deleted" | "reported";
 
 export type Comment = {
   id: string;
+  articleId?: string;
+  path?: string;
   userId: string;
   userName: string;
   userAvatar: string;
