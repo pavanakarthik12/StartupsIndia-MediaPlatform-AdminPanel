@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { createRoutesFromElements, Route, useRoutes } from "react-router-dom";
+import { createRoutesFromElements, Navigate, Route, useRoutes } from "react-router-dom";
 import { ProtectedRoute } from "@/routes/ProtectedRoute";
 import { AdminLayout } from "@/layouts/AdminLayout";
 
@@ -18,7 +18,6 @@ const HomeModules = lazy(() => import("@/pages/HomeModules").then((m) => ({ defa
 const Settings = lazy(() => import("@/pages/Settings").then((m) => ({ default: m.Settings })));
 const StaticPages = lazy(() => import("@/pages/StaticPages").then((m) => ({ default: m.StaticPages })));
 const Login = lazy(() => import("@/pages/Login").then((m) => ({ default: m.Login })));
-const Signup = lazy(() => import("@/pages/Signup").then((m) => ({ default: m.Signup })));
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })));
 
 export function RouteRenderer() {
@@ -26,7 +25,7 @@ export function RouteRenderer() {
     createRoutesFromElements(
       <Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<Navigate to="/login" replace />} />
         <Route
           element={
             <ProtectedRoute>

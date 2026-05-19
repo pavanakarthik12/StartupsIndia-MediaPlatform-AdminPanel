@@ -12,13 +12,13 @@ export function ProtectedRoute({
   children: ReactNode;
   allowedRoles?: AdminRole[];
 }) {
-  const { user, role, loading } = useAuth();
+  const { user, role, isAdmin, loading } = useAuth();
 
   if (loading) {
     return <LoadingScreen />;
   }
 
-  if (!user) {
+  if (!user || !isAdmin) {
     return <Navigate to={routes.login} replace />;
   }
 

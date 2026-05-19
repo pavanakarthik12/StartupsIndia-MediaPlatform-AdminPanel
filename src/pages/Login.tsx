@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getIdTokenResult, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "@/firebase/client";
 import { useToast } from "@/hooks/useToast";
 import { Card } from "@/components/ui/card";
@@ -38,11 +38,20 @@ export function Login() {
   const onSubmit = async (values: FormValues) => {
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, values.email, values.password);
+      const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+      const tokenResult = await getIdTokenResult(userCredential.user, true);
+
+      if (tokenResult.claims.admin !== true) {
+        await signOut(auth);
+        throw new Error("Access denied");
+      }
       push({ title: "Welcome back", description: "Logged in successfully." });
       navigate("/");
     } catch (error) {
-      push({ title: "Login failed", description: "Check your credentials.", variant: "danger" });
+      const message = error instanceof Error && error.message === "Access denied"
+        ? "Access denied. This account is not an admin."
+        : "Check your credentials.";
+      push({ title: "Login failed", description: message, variant: "danger" });
     } finally {
       setLoading(false);
     }
@@ -67,12 +76,6 @@ export function Login() {
             {loading ? "Signing in..." : "Sign In"}
           </Button>
 
-          <p className="mt-4 text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-primary hover:underline">
-              Sign up
-            </Link>
-          </p>
         </form>
       </Card>
     </div>
