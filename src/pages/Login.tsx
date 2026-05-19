@@ -21,14 +21,14 @@ type FormValues = z.infer<typeof schema>;
 export function Login() {
   const { push } = useToast();
   const navigate = useNavigate();
-  const { user, loading: authLoading } = useAuth();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (user && !authLoading) {
+    if (user && isAdmin && !authLoading) {
       navigate("/");
     }
-  }, [user, authLoading, navigate]);
+  }, [user, isAdmin, authLoading, navigate]);
   const {
     register,
     handleSubmit,
