@@ -1,0 +1,8 @@
+{
+  "dart.analysisExcludedFolders": [
+    "reference_files"
+  ],
+  "search.exclude": {
+    "reference_files": true
+  }
+}

@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 12%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --border: 0 0% 88%;
+  --ring: 0 80% 54%;
+  --primary: 0 80% 50%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 0 0% 95%;
+  --accent-foreground: 0 0% 12%;
+  --danger: 0 75% 52%;
+  --danger-foreground: 0 0% 98%;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: 0 0% 3%;
+  --foreground: 0 0% 96%;
+  --card: 0 0% 9%;
+  --card-foreground: 0 0% 96%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 68%;
+  --border: 0 40% 24%;
+  --ring: 0 80% 58%;
+  --primary: 0 80% 56%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 0 0% 14%;
+  --accent-foreground: 0 0% 96%;
+  --danger: 0 75% 58%;
+  --danger-foreground: 0 0% 98%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-feature-settings: "ss01" on, "ss03" on, "zero" on;
+}
+
+.app-shell {
+  background: radial-gradient(circle at top left, rgba(255, 80, 80, 0.12), transparent 45%),
+    radial-gradient(circle at 30% 20%, rgba(255, 80, 80, 0.05), transparent 55%);
+}
+
+.sidebar-shadow {
+  box-shadow: 0 20px 60px -40px rgba(0, 0, 0, 0.55);
+}
