@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { getIdTokenResult, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "@/firebase/client";
 import { useToast } from "@/hooks/useToast";
 import { Card } from "@/components/ui/card";
@@ -39,9 +39,7 @@ export function Login() {
     try {
       setLoading(true);
       const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
-      const tokenResult = await getIdTokenResult(userCredential.user, true);
-
-      if (tokenResult.claims.admin !== true) {
+      if (userCredential.user.uid !== "dbIZyFkKffXNurjPApZX15kaRx42") {
         await signOut(auth);
         throw new Error("Access denied");
       }
