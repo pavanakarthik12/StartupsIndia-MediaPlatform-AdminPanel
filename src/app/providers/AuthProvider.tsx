@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { onAuthStateChanged, getIdTokenResult, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/firebase/client";
 import type { AdminRole, AuthUser } from "@/types";
+
+const ADMIN_UID = "dbIZyFkKffXNurjPApZX15kaRx42";
 
 export type AuthContextValue = {
   user: AuthUser | null;
@@ -29,11 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      const tokenResult = await getIdTokenResult(firebaseUser, true);
-      const claimsRole = tokenResult.claims.role as AdminRole | undefined;
-      const claimsAdmin = tokenResult.claims.admin === true;
-
-      if (!claimsAdmin) {
+      if (firebaseUser.uid !== ADMIN_UID) {
         setUser(null);
         setRole("user");
         setIsAdmin(false);
@@ -47,7 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: firebaseUser.email ?? "",
         displayName: firebaseUser.displayName ?? ""
       });
-      setRole(claimsRole ?? "admin");
+      setRole("admin" as AdminRole);
       setIsAdmin(true);
       setLoading(false);
     });
